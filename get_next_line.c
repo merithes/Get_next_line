@@ -26,7 +26,7 @@ char	*ft_realloc(char *inp, int toalloc)
 	return (outp);
 }
 
-int		getchr(int fd)
+int		getchr(int fd,char *a)
 {
 	static int	bufchr = 0;
 	static char	*buffed;
@@ -40,38 +40,38 @@ int		getchr(int fd)
 		bufchr = read(fd, buffed, BUFF_SIZE);
 	}
 	if (bufchr == 0)
-		return (667);
+		return (0);
 	if (bufchr== -1)
-		return (666);
+		return (-1);
 	outp = buffed[bufpos++];
+	*a = outp;
 	bufchr--;
-	return (outp);
+	return (1);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	int		a;
+	char	a;
+	int		errn;
 	char	*outp;
 	int		i;
 	
 	if (!(outp = malloc(BUFF_SIZE + 1)) || BUFF_SIZE == 0 || fd < 0)
 		return (-1);
 	i = 0;
-	if ((a = getchr(fd)) == 666 || a == 667)
-		return (a == 667) ? -1 : 0;
-	while (a != '\n' && a != 0)
+	errn = getchr(fd, &a);
+	if (errn == -1 || errn == 0)
+		return (errn == -1) ? -1 : 0;
+	while (a != '\n' && a != '\0' && i < 10)
 	{
 		outp[i++] = (char)a;
 		if (BUFF_SIZE != 0 && (i % BUFF_SIZE) == 0)
-		{
 			if (!(outp = ft_realloc(outp, (BUFF_SIZE + i))))
 				return (-1);
-		}
-		if ((a = (char)getchr(fd)) == 667)
-			return (0);
+		if(!(getchr(fd, &a)))
+			break ;
 	}
 	outp[i] = '\0';
-	printf("%s\n", outp);
 	*line = outp;
 	return (1);
 }
