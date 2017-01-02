@@ -68,7 +68,7 @@ int		get_next_line(int fd, char **line)
 		if (BUFF_SIZE != 0 && (i % BUFF_SIZE) == 0)
 			if (!(outp = ft_realloc(outp, (BUFF_SIZE + i))))
 				return (-1);
-		if(!(getchr(fd, &a)))
+		if (!(getchr(fd, &a)))
 			break ;
 	}
 	outp[i] = '\0';
