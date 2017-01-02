@@ -19,14 +19,14 @@ char	*ft_realloc(char *inp, int toalloc)
 
 	i = -1;
 	if (!(outp = malloc(toalloc + 1)))
-		return NULL;
+		return (NULL);
 	while (inp[++i])
 		outp[i] = inp[i];
 	free(inp);
 	return (outp);
 }
 
-int		getchr(int fd,char *a)
+int		getchr(int fd, char *a)
 {
 	static int	bufchr = 0;
 	static char	*buffed;
@@ -41,7 +41,7 @@ int		getchr(int fd,char *a)
 	}
 	if (bufchr == 0)
 		return (0);
-	if (bufchr== -1)
+	if (bufchr == -1)
 		return (-1);
 	outp = buffed[bufpos++];
 	*a = outp;
@@ -55,7 +55,7 @@ int		get_next_line(int fd, char **line)
 	int		errn;
 	char	*outp;
 	int		i;
-	
+
 	if (!(outp = malloc(BUFF_SIZE + 1)) || BUFF_SIZE == 0 || fd < 0)
 		return (-1);
 	i = 0;
