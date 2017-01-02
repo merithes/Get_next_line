@@ -62,7 +62,7 @@ int		get_next_line(int fd, char **line)
 	errn = getchr(fd, &a);
 	if (errn == -1 || errn == 0)
 		return (errn == -1) ? -1 : 0;
-	while (a != '\n' && a != '\0' && i < 10)
+	while (a != '\n' && a != '\0')
 	{
 		outp[i++] = (char)a;
 		if (BUFF_SIZE != 0 && (i % BUFF_SIZE) == 0)
