@@ -1,5 +1,5 @@
 #ifndef GET_NEXT_LINE_H
-# define BUFF_SIZE 0
+# define BUFF_SIZE 64 
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
