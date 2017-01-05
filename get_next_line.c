@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 16:05:58 by vboivin           #+#    #+#             */
-/*   Updated: 2017/01/02 19:24:48 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/01/05 18:07:09 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,15 @@ int		getchr(int fd, char *a)
 	static int	bufpos = 0;
 	char		outp;
 
+	printf("2a\n");
 	if (bufchr == 0)
 	{
 		bufpos = 0;
 		buffed = malloc(BUFF_SIZE + 1);
+		printf("2b\n");
 		bufchr = read(fd, buffed, BUFF_SIZE);
 	}
+	printf("%d\n", bufchr);
 	if (bufchr == 0)
 		return (0);
 	if (bufchr == -1)
@@ -56,15 +59,18 @@ int		get_next_line(int fd, char **line)
 	char	*outp;
 	int		i;
 
-	if (!(outp = malloc(BUFF_SIZE + 1)) || BUFF_SIZE == 0 || fd < 0)
+	outp = malloc(BUFF_SIZE + 1);
+	if (outp == NULL || BUFF_SIZE <= 0 || fd < 0)
 		return (-1);
 	i = 0;
+	printf("1a\n");
 	errn = getchr(fd, &a);
+	printf("1b\n");
 	if (errn == -1 || errn == 0)
 		return (errn == -1) ? -1 : 0;
 	while (a != '\n' && a != '\0')
 	{
-		outp[i++] = (char)a;
+		outp[i++] = a;
 		if (BUFF_SIZE != 0 && (i % BUFF_SIZE) == 0)
 			if (!(outp = ft_realloc(outp, (BUFF_SIZE + i))))
 				return (-1);
