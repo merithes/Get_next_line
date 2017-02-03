@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 14:54:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/01/20 19:33:37 by vboivin          ###   ########.fr       */
+/*   Created: 2016/12/06 18:43:28 by vboivin           #+#    #+#             */
+/*   Updated: 2016/12/08 20:13:21 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 79
-# define MAX_FD_VALUE 4864
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdio.h>
+#include "libft.h"
 
-int		get_next_line(int fd, char **input);
-
-#endif
+void	ft_putstr(char *str)
+{
+	write(1, str, ft_strlen(str));
+}

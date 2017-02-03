@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 14:54:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/01/20 19:33:37 by vboivin          ###   ########.fr       */
+/*   Created: 2016/12/04 20:21:01 by vboivin           #+#    #+#             */
+/*   Updated: 2016/12/08 15:08:30 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 79
-# define MAX_FD_VALUE 4864
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdio.h>
+#include "libft.h"
 
-int		get_next_line(int fd, char **input);
+char	*ft_strncat(char *dest, const char *src, size_t limit)
+{
+	size_t	isrc;
+	int		idest;
 
-#endif
+	idest = ft_strlen(dest);
+	isrc = 0;
+	while (src[isrc] && isrc < limit)
+	{
+		dest[idest++] = src[isrc++];
+	}
+	dest[idest] = '\0';
+	return (dest);
+}

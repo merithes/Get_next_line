@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 14:54:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/01/20 19:33:37 by vboivin          ###   ########.fr       */
+/*   Created: 2016/12/04 16:05:58 by vboivin           #+#    #+#             */
+/*   Updated: 2016/12/06 20:04:46 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 79
-# define MAX_FD_VALUE 4864
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdio.h>
+#include "libft.h"
 
-int		get_next_line(int fd, char **input);
+void	*ft_memcpy(void *dest, const void *src, size_t amnt)
+{
+	const char	*src_char;
+	char		*dest_char;
 
-#endif
+	src_char = (char *)src;
+	dest_char = (char *)dest;
+	while (amnt)
+	{
+		*dest_char++ = *src_char++;
+		amnt--;
+	}
+	return (dest);
+}

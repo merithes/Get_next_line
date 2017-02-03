@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   shifter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 14:54:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/01/20 19:33:37 by vboivin          ###   ########.fr       */
+/*   Created: 2017/02/01 15:15:50 by vboivin           #+#    #+#             */
+/*   Updated: 2017/02/02 19:34:57 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 79
-# define MAX_FD_VALUE 4864
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdio.h>
+#include "libft.h"
+#include <stdio.h>
 
-int		get_next_line(int fd, char **input);
+char		*shifter(char *inp, int movr)
+{
+	char	*outp;
+	int		len;
 
-#endif
+	len = ft_strlen(inp) - ++movr;
+	if (len > 0)
+	{
+		if (!(outp = malloc(len + 1)))
+			return (NULL);
+		ft_bzero(outp, len);
+		if (inp[movr] && outp)
+			ft_strcpy(outp, inp + movr);
+	}
+	else
+	{
+		if (!(outp = malloc(1)))
+			return (NULL);
+		outp[0] = 0;
+	}
+	if (inp)
+		free(inp);
+	return (outp);
+}

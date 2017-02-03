@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 14:54:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/01/20 19:33:37 by vboivin          ###   ########.fr       */
+/*   Created: 2016/12/01 19:25:49 by vboivin           #+#    #+#             */
+/*   Updated: 2016/12/02 17:23:15 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 79
-# define MAX_FD_VALUE 4864
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdio.h>
+void	ft_swap(int *a, int *b)
+{
+	int swapper;
 
-int		get_next_line(int fd, char **input);
-
-#endif
+	swapper = *a;
+	*a = *b;
+	*b = swapper;
+}

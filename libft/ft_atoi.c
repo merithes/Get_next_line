@@ -1,26 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/12 14:54:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/01/20 19:33:37 by vboivin          ###   ########.fr       */
+/*   Created: 2016/12/05 15:46:23 by vboivin           #+#    #+#             */
+/*   Updated: 2016/12/08 12:05:12 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 79
-# define MAX_FD_VALUE 4864
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdio.h>
+#include "libft.h"
 
-int		get_next_line(int fd, char **input);
+int		ft_atoi(const char *str)
+{
+	int i;
+	int nb;
+	int isneg;
 
-#endif
+	i = 0;
+	nb = 0;
+	isneg = 0;
+	while ((8 < str[i] && str[i] < 14) || str[i] == ' ')
+		i++;
+	if (str[i] == '-')
+	{
+		i++;
+		isneg = 1;
+	}
+	else if (str[i] == '+')
+		i++;
+	while ((48 <= str[i] && str[i] <= 57) && str[i])
+	{
+		nb *= 10;
+		nb = nb + str[i] - '0';
+		i++;
+	}
+	if (isneg == 1)
+		return (-nb);
+	return (nb);
+}
