@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:56:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/02/02 19:52:21 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/02/03 18:58:34 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ long long	ft_charget(char *inp)
 	if (!(inp))
 		return (-1);
 	while (inp[++i] != '\0')
+	{
 		if (inp[i] == '\n')
 			return (i);
+	}
 	return (i);
 }
 
@@ -99,10 +101,14 @@ int			get_next_line(int fd, char **line)
 	if (fd < 0 || fd > MAX_FD_VALUE || !line || BUFF_SIZE <= 0)
 		return (-1);
 	if (!stokr[fd])
+	{
 		if (readit(fd, &stokr[fd]) == -1)
 			return (-1);
+	}
 	if ((len_line = ft_charget(stokr[fd])) == -1 || stokr[fd][0] == '\0')
 	{
+		free(stokr[fd]);
+		stokr[fd] = NULL;
 		*line = NULL;
 		return (0);
 	}
