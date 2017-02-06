@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:56:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/02/03 18:58:34 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/02/06 15:48:56 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ int			readit(int fd, char **inp)
 	int		errn;
 
 	i = 0;
-	bufr = malloc(BUFF_SIZE);
-	if (!(outp = malloc(BUFF_SIZE)) || !(bufr))
+	bufr = ft_strnew(BUFF_SIZE);
+	if (!(outp = ft_strnew(BUFF_SIZE)) || !(bufr))
 		return (-1);
-	ft_bzero(outp, BUFF_SIZE);
 	while (i >= 0)
 	{
 		errn = read(fd, bufr, BUFF_SIZE);
@@ -74,22 +73,29 @@ long long	ft_charget(char *inp)
 	return (i);
 }
 
-int			cpy(char **dest, char *src, int len)
+char		*shifter(char *inp, int movr)
 {
 	char	*outp;
-	int		i;
+	int		len;
 
-	i = 0;
-	if (!(outp = ft_strnew(len)))
-		return (-1);
-	while (i < len)
+	len = ft_strlen(inp) - ++movr;
+	if (len > 0)
 	{
-		outp[i] = src[i];
-		i++;
+		if (!(outp = malloc(len + 1)))
+			return (NULL);
+		ft_bzero(outp, len);
+		if (inp[movr] && outp)
+			ft_strcpy(outp, inp + movr);
 	}
-	outp[i] = 0;
-	*dest = outp;
-	return (0);
+	else
+	{
+		if (!(outp = malloc(1)))
+			return (NULL);
+		outp[0] = 0;
+	}
+	if (inp)
+		free(inp);
+	return (outp);
 }
 
 int			get_next_line(int fd, char **line)
@@ -112,7 +118,9 @@ int			get_next_line(int fd, char **line)
 		*line = NULL;
 		return (0);
 	}
-	cpy(&toset, stokr[fd], len_line);
+	if (!(toset = ft_strnew(len_line)))
+		return (-1);
+	ft_strncpy(toset, stokr[fd], len_line);
 	stokr[fd] = shifter(stokr[fd], len_line);
 	*line = toset;
 	return (1);

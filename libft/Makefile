@@ -6,7 +6,7 @@
 #    By: vboivin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/02 19:24:22 by vboivin           #+#    #+#              #
-#    Updated: 2016/12/14 12:01:18 by vboivin          ###   ########.fr        #
+#    Updated: 2017/02/06 16:12:11 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCC =	ft_atoi.c ft_bzero.c ft_foreach.c ft_intlen.c ft_isalnum.c ft_isalpha.c\
 		ft_strlcat.c ft_strlen.c ft_strmap.c ft_strmapi.c ft_strncat.c \
 		ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c \
 		ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c \
-		ft_swap.c ft_tolower.c ft_toupper.c shifter.c 
+		ft_swap.c ft_tolower.c ft_toupper.c  
 
 SRCO =	ft_atoi.o ft_bzero.o ft_foreach.o ft_intlen.o ft_isalnum.o ft_isalpha.o\
 		ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_lenchar.o \
@@ -39,7 +39,7 @@ SRCO =	ft_atoi.o ft_bzero.o ft_foreach.o ft_intlen.o ft_isalnum.o ft_isalpha.o\
 		ft_strlcat.o ft_strlen.o ft_strmap.o ft_strmapi.o ft_strncat.o \
 		ft_strncmp.o ft_strncpy.o ft_strnequ.o ft_strnew.o ft_strnstr.o \
 		ft_strrchr.o ft_strsplit.o ft_strstr.o ft_strsub.o ft_strtrim.o \
-		ft_swap.o ft_tolower.o ft_toupper.o shifter.o
+		ft_swap.o ft_tolower.o ft_toupper.o 
 
 
 HEADERS = .
