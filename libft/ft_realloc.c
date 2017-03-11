@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/04 18:50:01 by vboivin           #+#    #+#             */
-/*   Updated: 2017/02/06 20:12:00 by vboivin          ###   ########.fr       */
+/*   Created: 2017/02/09 17:16:41 by vboivin           #+#    #+#             */
+/*   Updated: 2017/03/01 13:05:36 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
+char				*ft_realloc(char *inp, int qty)
 {
+	char	*outp;
 	int		i;
 
 	i = 0;
-	while (s1[i] == s2[i])
+	if (!(outp = malloc(qty + 1)))
+		return (NULL);
+	while (i <= qty)
+		outp[i++] = 0;
+	i = 0;
+	while (inp[i] && i < qty)
 	{
-		if (s1[i] == '\0')
-			return (0);
+		outp[i] = inp[i];
 		i++;
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	outp[i] = 0;
+	free(inp);
+	return (outp);
 }

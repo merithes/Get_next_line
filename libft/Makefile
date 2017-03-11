@@ -6,7 +6,7 @@
 #    By: vboivin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/02 19:24:22 by vboivin           #+#    #+#              #
-#    Updated: 2017/02/06 16:12:11 by vboivin          ###   ########.fr        #
+#    Updated: 2017/03/11 20:31:29 by vboivin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,29 +25,20 @@ SRCC =	ft_atoi.c ft_bzero.c ft_foreach.c ft_intlen.c ft_isalnum.c ft_isalpha.c\
 		ft_strlcat.c ft_strlen.c ft_strmap.c ft_strmapi.c ft_strncat.c \
 		ft_strncmp.c ft_strncpy.c ft_strnequ.c ft_strnew.c ft_strnstr.c \
 		ft_strrchr.c ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c \
-		ft_swap.c ft_tolower.c ft_toupper.c  
+		ft_swap.c ft_tolower.c ft_toupper.c strchr_int.c free_join.c \
+		ft_realloc.c	
 
-SRCO =	ft_atoi.o ft_bzero.o ft_foreach.o ft_intlen.o ft_isalnum.o ft_isalpha.o\
-		ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_lenchar.o \
-		ft_lstadd.o ft_lstdel.o ft_lstdelone.o ft_lstiter.o ft_lstmap.o \
-		ft_lstnew.o ft_memalloc.o ft_memccpy.o ft_memchr.o ft_memcmp.o \
-		ft_memcpy.o ft_memdel.o ft_memmove.o ft_memset.o ft_putchar.o \
-		ft_putchar_fd.o ft_putendl.o ft_putendl_fd.o ft_putnbr.o \
-		ft_putnbr_fd.o ft_putstr.o ft_putstr_fd.o ft_sqrt.o ft_strcat.o \
-		ft_strchr.o ft_strclr.o ft_strcmp.o ft_strcpy.o ft_strdel.o \
-		ft_strdup.o ft_strequ.o ft_striter.o ft_striteri.o ft_strjoin.o \
-		ft_strlcat.o ft_strlen.o ft_strmap.o ft_strmapi.o ft_strncat.o \
-		ft_strncmp.o ft_strncpy.o ft_strnequ.o ft_strnew.o ft_strnstr.o \
-		ft_strrchr.o ft_strsplit.o ft_strstr.o ft_strsub.o ft_strtrim.o \
-		ft_swap.o ft_tolower.o ft_toupper.o 
+SRCO =	$(SRCC:.c=.o)
 
 
 HEADERS = .
 
 all: $(NAME)
 
-$(NAME):
-	gcc -Wall -Wextra -Werror $(SRCC) -I $(HEADERS) -c
+%.o: %.c libft.h Makefile
+	gcc -g -Wall -Werror -Wextra -c $< -o $@ -I .
+
+$(NAME): $(SRCO)
 	ar rc $(NAME) $(SRCO)
 	ranlib $(NAME)
 
@@ -57,4 +48,5 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re: fclean
+	make

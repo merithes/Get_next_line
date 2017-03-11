@@ -6,122 +6,92 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:56:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/02/06 15:48:56 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/03/11 22:21:47 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char		*ft_realloc(char *inp, int qty)
+static	int			readit(int fd, char **inp)
 {
-	char	*outp;
-	int		i;
+	char			*bufr;
+	char			*outp;
+	int				errn;
+	int				i;
 
+	printf("ra\n");
+	outp = (!*inp) ? ft_strnew(BUFF_SIZE) : *inp;
+	printf("rb\n");
+	bufr = ft_strnew(BUFF_SIZE);
+	printf("rc\n");
+	if ((!(outp)) || !(bufr))
+		return (-1);
+	printf("rd:%d:%d:\n", (int)bufr, (int)outp);
 	i = 0;
-	if (!(outp = malloc(qty)))
-		return (NULL);
-	while (inp[i])
+	ft_bzero(bufr, BUFF_SIZE + 1);
+	while ((errn = read(fd, bufr, BUFF_SIZE)) != 0)
 	{
-		outp[i] = inp[i];
+		if (errn == -1 || ((outp = free_join(outp, bufr)) == NULL))
+			return (-1);
+		if (bufr[0] == '\n' ||(strchr_int(bufr, '\n') != 0 &&
+			(size_t)strchr_int(bufr, '\n') - 1 != ft_strlen(bufr)))
+			break ;
+		ft_bzero(bufr, BUFF_SIZE + 1);
 		i++;
 	}
-	outp[i] = 0;
-	free(inp);
-	return (outp);
-}
-
-int			readit(int fd, char **inp)
-{
-	char	*bufr;
-	char	*outp;
-	int		i;
-	int		errn;
-
-	i = 0;
-	bufr = ft_strnew(BUFF_SIZE);
-	if (!(outp = ft_strnew(BUFF_SIZE)) || !(bufr))
-		return (-1);
-	while (i >= 0)
-	{
-		errn = read(fd, bufr, BUFF_SIZE);
-		if ((errn == -1)
-				|| (i++ != 0 && !(outp = ft_realloc(outp, (i * BUFF_SIZE)))))
-			return (-1);
-		ft_strncat(outp, bufr, errn);
-		ft_bzero(bufr, BUFF_SIZE);
-		if (errn < BUFF_SIZE || errn == 0)
-			break ;
-	}
-	free(bufr);
-	if (i > 0)
-		*inp = outp;
+	*inp = outp;
+	if (errn == 0 && i == 0)
+		return (0);
 	return (1);
 }
 
-long long	ft_charget(char *inp)
+static	char		*shifter(char *inp, int movr)
 {
-	long long int	i;
-
-	i = -1;
-	if (!(inp))
-		return (-1);
-	while (inp[++i] != '\0')
-	{
-		if (inp[i] == '\n')
-			return (i);
-	}
-	return (i);
-}
-
-char		*shifter(char *inp, int movr)
-{
-	char	*outp;
-	int		len;
+	char			*outp;
+	int				len;
 
 	len = ft_strlen(inp) - ++movr;
-	if (len > 0)
+	if (len >= 0)
 	{
-		if (!(outp = malloc(len + 1)))
+		if (!(outp = ft_strnew(len + 1)))
 			return (NULL);
-		ft_bzero(outp, len);
 		if (inp[movr] && outp)
 			ft_strcpy(outp, inp + movr);
 	}
 	else
-	{
-		if (!(outp = malloc(1)))
-			return (NULL);
-		outp[0] = 0;
-	}
+		outp = NULL;
 	if (inp)
 		free(inp);
 	return (outp);
 }
 
-int			get_next_line(int fd, char **line)
+int					get_next_line(int fd, char **line)
 {
-	static	char	*stokr[MAX_FD_VALUE];
+	static	char	*stokr[20000];
 	int				len_line;
-	char			*toset;
+	char			*outp;
+	int				ret;
 
-	if (fd < 0 || fd > MAX_FD_VALUE || !line || BUFF_SIZE <= 0)
+	len_line = 0;
+	ret = 0;
+	printf("ga\n");
+	if (fd < 0 || !line || BUFF_SIZE <= 0 ||
+			(ret = readit(fd, &stokr[fd])) == -1)
 		return (-1);
-	if (!stokr[fd])
+	printf("b\n");
+	if (((ret == 0) && !stokr[fd]) || !stokr[fd][0])
 	{
-		if (readit(fd, &stokr[fd]) == -1)
-			return (-1);
-	}
-	if ((len_line = ft_charget(stokr[fd])) == -1 || stokr[fd][0] == '\0')
-	{
-		free(stokr[fd]);
-		stokr[fd] = NULL;
+		if (stokr[fd])
+			ft_memdel((void **)&stokr[fd]);
 		*line = NULL;
 		return (0);
 	}
-	if (!(toset = ft_strnew(len_line)))
+	if (!(len_line = strchr_int(stokr[fd], '\n')))
+		len_line = ft_strlen(stokr[fd]) + 1;
+	if (!(outp = ft_strnew(len_line)))
 		return (-1);
-	ft_strncpy(toset, stokr[fd], len_line);
-	stokr[fd] = shifter(stokr[fd], len_line);
-	*line = toset;
+	ft_strncpy(outp, stokr[fd], len_line - 1);
+	stokr[fd] = shifter(stokr[fd], len_line - 1);
+	*line = outp;
 	return (1);
 }

@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shifter.c                                          :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/01 15:15:50 by vboivin           #+#    #+#             */
-/*   Updated: 2017/02/02 19:34:57 by vboivin          ###   ########.fr       */
+/*   Created: 2017/01/05 17:52:04 by vboivin           #+#    #+#             */
+/*   Updated: 2017/03/11 22:07:20 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "get_next_line.h"
 
-char		*shifter(char *inp, int movr)
+int		main(int ac, char **av)
 {
-	char	*outp;
-	int		len;
+	char	*str;
+	int		fd;
+	int	rez;
 
-	len = ft_strlen(inp) - ++movr;
-	if (len > 0)
-	{
-		if (!(outp = malloc(len + 1)))
-			return (NULL);
-		ft_bzero(outp, len);
-		if (inp[movr] && outp)
-			ft_strcpy(outp, inp + movr);
-	}
-	else
-	{
-		if (!(outp = malloc(1)))
-			return (NULL);
-		outp[0] = 0;
-	}
-	if (inp)
-		free(inp);
-	return (outp);
+	ac++;
+	fd = open(av[1], O_RDONLY);
+	rez = get_next_line(fd, &str);
+	printf("%s:%d\n", str, rez);
+	return 0;
 }

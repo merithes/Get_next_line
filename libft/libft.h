@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/04 14:49:03 by vboivin           #+#    #+#             */
-/*   Updated: 2017/02/06 15:48:09 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/02/09 17:51:43 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,27 @@ typedef struct		s_list
 }					t_list;
 
 void				*ft_memccpy(void *dest, const void *src, \
-					int tocheck, size_t amnt);
+						int tocheck, size_t amnt);
 void				*ft_memchr(const void *str, int tocheck, size_t limit);
 int					ft_memcmp(const void *stri1, const void \
-					*stri2, size_t tocomp);
+						*stri2, size_t tocomp);
 void				*ft_memcpy(void *dest, const void *src, size_t amnt);
 void				*ft_memmove(void *dest, const void *src, size_t amnt);
 void				*ft_memset(void *str, int chr, size_t bytes_to_set);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
-char				*free_run(int size, char *inp);
+char				*free_join(char *s1, char *s2);
+char				*ft_realloc(char *inp, int qty);
 
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strncat(char *dest, const char *src, size_t limit);
 size_t				ft_strlcat(char *dest, const char *src, size_t size);
 char				*ft_strchr(const char *str, int chr);
+int					strchr_int(char *input, int char_to_find);
 char				*ft_strrchr(const char *str, int chr);
 int					ft_strcmp(const char *str1, const char *str2);
 int					ft_strncmp(const char *str1, \
-					const char *str2, size_t tocomp);
+						const char *str2, size_t tocomp);
 char				*ft_strncpy(char *dest, const char *src, size_t limit);
 char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strdup(const char *str);
