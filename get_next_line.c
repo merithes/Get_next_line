@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:56:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/03/23 19:59:04 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/03/23 20:07:44 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char			*shifter(char *inp, int movr)
 
 int					get_next_line(int fd, char **line)
 {
-	static	char	*stokr[0];
+	static	char	*stokr;
 	int				len_line;
 	char			*outp;
 	int				ret;
