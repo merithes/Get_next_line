@@ -6,7 +6,7 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 20:23:36 by vboivin           #+#    #+#             */
-/*   Updated: 2017/03/11 21:51:47 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/02/07 20:25:27 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ char	*free_join(char *inp1, char *inp2)
 {
 	char	*outp;
 
-	outp = ft_strjoin(inp1, inp2);
-	if (inp1)
-		free(inp1);
+	if (!(outp = ft_strjoin(inp1, inp2)))
+		return (NULL);
+	free(inp1);
+	inp1 = NULL;
 	return (outp);
 }
