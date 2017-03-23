@@ -6,18 +6,22 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:56:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/03/21 15:10:32 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/03/23 19:59:04 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static int			assign(char **buf, char **toset, char **preset)
 {
-	*toset = (!*preset) ? ft_strnew(BUFF_SIZE) : *preset;
+	printf("aa%s\n", *preset);
+	printf("a2a\n");
 	if (!*toset)
 		return (-1);
+	printf("ab\n");
 	*buf = ft_strnew(BUFF_SIZE);
+	printf("ac\n");
 	if (!*buf)
 		return (-1);
 	return (0);
@@ -30,9 +34,15 @@ static int			readit(int fd, char **inp)
 	int				errn;
 	int				i;
 
+	printf("ra\n");
+	outp = (!*inp) ? ft_strnew(BUFF_SIZE) : *inp;
 	if (assign(&bufr, &outp, inp) == -1)
-		return (-1);
+	{
+		printf("r2a\n");
+		return (-1);}
+	printf("rb\n");
 	i = 0;
+	printf("rc\n");
 	ft_bzero(bufr, BUFF_SIZE + 1);
 	while ((errn = read(fd, bufr, BUFF_SIZE)) != 0)
 	{
@@ -74,13 +84,14 @@ static char			*shifter(char *inp, int movr)
 
 int					get_next_line(int fd, char **line)
 {
-	static	char	*stokr[1337];
+	static	char	*stokr[0];
 	int				len_line;
 	char			*outp;
 	int				ret;
 
 	len_line = 0;
 	ret = 0;
+	printf("a\n");
 	if (fd < 0 || !line || BUFF_SIZE <= 0 ||
 			(ret = readit(fd, &stokr[fd])) == -1)
 		return (-1);
