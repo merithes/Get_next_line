@@ -6,18 +6,25 @@
 /*   By: vboivin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:54:14 by vboivin           #+#    #+#             */
-/*   Updated: 2017/03/23 20:07:46 by vboivin          ###   ########.fr       */
+/*   Updated: 2017/03/24 19:31:25 by vboivin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 10000
+# define BUFF_SIZE 53
 # include "libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
 
-int		get_next_line(int fd, char **input);
+typedef struct		s_mem
+{
+	char			*mem;
+	int				fd;
+	struct s_mem	*next;
+}					t_mem;
+
+int					get_next_line(int fd, char **input);
 
 #endif
